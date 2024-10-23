@@ -68,7 +68,7 @@ SparseMatrix SparseMatrix::Transpose02() const {
 
 `Transpose02()` 함수의 전체 시간 복잡도는 **두 중첩 반복문**에 의해 결정된다:
 
-- 외부 반복문은 `O(num_rows_)`이고, 내부 반복문은 `O(num_terms_)` 입니다.
+- 외부 반복문은 `O(num_rows_)`이고, 내부 반복문은 `O(num_terms_)` 이다.
 - 전체 시간 복잡도는 `O(num_rows_ * num_terms_)`.
 
 ### 두 함수의 Big-O 비교:
