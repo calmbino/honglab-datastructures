@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "../Shared/Stack.h" // 경로 "shared" 주의
+#include "../../Shared/Stack.h" // 경로 "shared" 주의
 
 int main() {
     using namespace std;
