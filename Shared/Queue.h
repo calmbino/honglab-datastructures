@@ -59,11 +59,19 @@ public:
 		const int new_capacity = capacity_ * 2;
 		T *new_queue = new T[new_capacity];
 
+		// memcpy에서 copy로 변환
+		// T가 char, int와 같은 단순 타입이 아닌 string 등과 같은 객체 타입일 경우 문제가 발생
+		// memcpy는 단순히 메모리를 바이트 단위로 복사할 뿐, 객체의 생성자나 복사 생성자를 호출하지 않는다.
+		// 따라서 복사된 두 객체가 같은 메모리를 참조하게 되어, 한 객체가 소멸될 때 다른 객체의 내부 데이터가 해제되는 문제가 발생될 수 있다
+		// copy는 객체의 특성을 고려한 안전한 복사 방식을 사용하기 때문에 memcpy 보다 안전하다.
 		if (front_ < rear_) {
-			memcpy(new_queue, queue_, sizeof(T) * (Size() + 1));
+			// memcpy(new_queue, queue_, sizeof(T) * (Size() + 1));
+			copy(queue_, queue_ + Size() + 1, new_queue);
 		} else {
-			memcpy(&new_queue[1], &queue_[(front_ + 1) % capacity_], sizeof(T) * (capacity_ - 1 - front_));
-			memcpy(&new_queue[capacity_ - front_], queue_, sizeof(T) * (rear_ + 1));
+			// memcpy(&new_queue[1], &queue_[(front_ + 1) % capacity_], sizeof(T) * (capacity_ - 1 - front_));
+			// memcpy(&new_queue[capacity_ - front_], queue_, sizeof(T) * (rear_ + 1));
+			copy(&queue_[(front_ + 1) % capacity_], &queue_[capacity_], &new_queue[1]);
+			copy(queue_, queue_ + (rear_ + 1), &new_queue[capacity_ - front_]);
 		}
 
 		rear_ = Size();
