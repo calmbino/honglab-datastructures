@@ -51,10 +51,10 @@ int main() {
 	cout << "Postfix: ";
 	postfix.Print();
 
-	const double result = EvalPostfix(postfix);
+	// const double result = EvalPostfix(postfix);
 
 	cout << endl;
-	cout << "Evaluated = " << result << endl;
+	cout << "Evaluated = " << EvalPostfix(postfix) << endl;
 
 	return 0;
 }
